@@ -102,7 +102,7 @@ def frameCluster(histogram, frame_size, threshold, weight, rate):
 
     # merge some class which size is smaller than rate*number_of_frames into the nearest class
     minMerge=rate*len(histogram)
-    mergeCluser={}  #store illegal classes
+    mergeCluser={}  # store illegal classes
 
     # delete the illegal classes from origin cluster and store them into mergeCluster
     i=0
@@ -114,18 +114,21 @@ def frameCluster(histogram, frame_size, threshold, weight, rate):
 
 
     # merge
-    for v in mergeCluser:
-        minSimilarty=sys.maxsize
-        mergeIndex=list(cluster.keys())[0]
+    if 0==len(cluster):
+        cluster=mergeCluser
+    else:
+        for v in mergeCluser:
+            minSimilarty=sys.maxsize
+            mergeIndex=list(cluster.keys())[0]
 
-        for source in cluster:
-            similarity=calSimilarity(cluster[source]['centroid'],mergeCluser[v]['centroid'],frame_size,weight)
-            if similarity < minSimilarty:
-                minSimilarty=similarity
-                mergeIndex=source
+            for source in cluster:
+                similarity=calSimilarity(cluster[source]['centroid'],mergeCluser[v]['centroid'],frame_size,weight)
+                if similarity < minSimilarty:
+                    minSimilarty=similarity
+                    mergeIndex=source
 
-        cluster[mergeIndex]['value'].extend(mergeCluser[v]['value'])
-        updateCentroid(cluster[mergeIndex]['centroid'],mergeCluser[v]['centroid'],len(cluster[mergeIndex]['value']))
+            cluster[mergeIndex]['value'].extend(mergeCluser[v]['value'])
+            updateCentroid(cluster[mergeIndex]['centroid'],mergeCluser[v]['centroid'],len(cluster[mergeIndex]['value']))
 
     # # print the merged cluster
     # for v in cluster:
@@ -160,7 +163,7 @@ def keyFramesExtracte(histogram,cluster, frames, savePath=None, filePrefix=''):
             hvalue=histogram[index][0]  # the histogram of h
             total=sum(hvalue)
 
-            p=[-(x/total)*math.log(x/total) for x in hvalue]
+            p=[-(x/total)*math.log(x/total) for x in hvalue if x != 0]
             entropy=sum(p)
 
             if entropy > maxEntropy:
@@ -186,5 +189,5 @@ if __name__ == '__main__':
 
     frames, histogram, frame_size = frame.saveFrameOfVideos(filePath)
     histogramCluster = frameCluster(histogram,frame_size, threshold,weight,0.05)
-    keyFrames = keyFramesExtracte(histogram, histogramCluster,frames,savePath,prefix)
+    keyFrames = keyFramesExtracte(histogram, histogramCluster,frames)
 
