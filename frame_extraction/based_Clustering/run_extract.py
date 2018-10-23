@@ -75,9 +75,9 @@ def extractRecursive(path, savePath,threshold, weight):
 
 
 if __name__ == '__main__':
-    path='/Users/xuweijie/Downloads/data2/'
+    path='/Users/xuweijie/Downloads/data/UCF-101/'
     savePath='/Users/xuweijie/Downloads/frames/'
-    threshold = 0.0125
+    threshold = 0.5
     weight = [0.5, 0.3, 0.2]
 
     start = time.time()
