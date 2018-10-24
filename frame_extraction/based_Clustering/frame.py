@@ -86,5 +86,37 @@ def getHistogram(frame):
 
     return hist
 
+def readDataFromDir(dirPath):
+    """
+    read the frames from a directory, return it as a list
+    :param dirPath:
+    :return:
+    """
+    frames=[]
 
+    # verificate the dirPath
+    if not os.path.exists(dirPath) or not os.path.isdir(dirPath):
+        return frames
 
+    videos=os.listdir(dirPath)
+    if 0 == len(videos):
+        return frames
+
+    if '/' != dirPath[-1]:
+        dirPath+='/'
+
+    for frames_path in videos:
+        frames_path=dirPath+frames_path
+
+        pic=cv2.imread(frames_path)
+
+        frames.append(pic)
+
+    return frames
+
+if __name__ == '__main__':
+    filePath = 'resources/21_drink_u_nm_np1_fr_goo_9/rgb/'
+
+    saveFrameOfVideos('resources/AmericanGangster_hit_h_cm_np1_ri_bad_63.avi')
+    # frames=readDataFromDir(filePath)
+    # print(frames)
