@@ -189,5 +189,5 @@ if __name__ == '__main__':
 
     frames, histogram, frame_size = frame.saveFrameOfVideos(filePath)
     histogramCluster = frameCluster(histogram,frame_size, threshold,weight,0.05)
-    keyFrames = keyFramesExtracte(histogram, histogramCluster,frames)
+    keyFrames = keyFramesExtracte(histogram, histogramCluster,frames, savePath, prefix)
 

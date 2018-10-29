@@ -1,7 +1,7 @@
 """
     this file is based on gray centroid and to get the key frames
 """
-import frame
+import frame_centroid
 import os
 import cv2
 import shutil
@@ -133,7 +133,7 @@ def calkeyframe(bigdata, smalldata, graycentvalue):
 if __name__ == '__main__':
     filePath = 'resources/21_drink_u_nm_np1_fr_goo_9.avi'
 
-    frames, graycentvalue, frame_size, frame_count = frame.saveFrameOfVideos(filePath)
+    frames, graycentvalue, frame_size, frame_count = frame_centroid.saveFrameOfVideos(filePath)
     print(frame_count)
     flag = getsimilize(graycentvalue)
     # didflag是第几帧到第几帧的索引号
