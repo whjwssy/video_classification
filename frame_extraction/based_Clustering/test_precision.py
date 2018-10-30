@@ -11,7 +11,7 @@ def loadTestAndTrainData(filePath, rate):
     split the frames in path of filePath into testing and training data as the rate
     :param filePath: the file path
     :param rate:
-    :return: training and testing data
+    :return: training and testing data3.jpg
     """
     if '/' != filePath[-1]:
         filePath+='/'
