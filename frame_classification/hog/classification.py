@@ -49,7 +49,10 @@ def loadTestAndTrainData(filePath, rate):
                 continue
 
             for frame_name in frame_name_list:
+                if '.DS_Store' == frame_name:
+                    continue
                 frame_path=video_path+frame_name   #图片的全路径
+
 
                 #修改
                 # 1 。读取灰度图
@@ -83,6 +86,8 @@ def loadTestAndTrainData(filePath, rate):
 
             video_test=[]
             for frame_name in frame_name_list:
+                if '.DS_Store' == frame_name:
+                    continue
                 frame_path = video_path + frame_name
 
                 # 修改
@@ -189,18 +194,18 @@ def SVM(test_data, test_label, train_data, train_label):
     return precision, unpre
 
 if __name__ == '__main__':
-    filePath='../../resources/person_detect/detect_frames/'
+    filePath='/Users/xuweijie/Downloads/check/'
     test_data, test_label, train_data, train_label=loadTestAndTrainData(filePath,0.1)
     totalSize=len(test_label)
     start=time.time()
 
-    # # knn
-    # print("KNN start!")
-    # precision, unpre=KNN(test_data, test_label, train_data, train_label)
+    # knn
+    print("KNN start!")
+    precision, unpre=KNN(test_data, test_label, train_data, train_label)
 
-    # svm
-    print("SVM start!")
-    precision, unpre=SVM(test_data, test_label, train_data, train_label)
+    # # svm
+    # print("SVM start!")
+    # precision, unpre=SVM(test_data, test_label, train_data, train_label)
 
 
     print("Running time:%s"%str(time.time()-start))
