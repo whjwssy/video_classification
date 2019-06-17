@@ -194,18 +194,20 @@ def SVM(test_data, test_label, train_data, train_label):
     return precision, unpre
 
 if __name__ == '__main__':
-    filePath='/Users/xuweijie/Downloads/check/'
+    # filePath='/Users/wanghongjin/Desktop/222/'
+    # filePath = '../../resources/person_detect/detect_frames/'
+    filePath = '/Users/wanghongjin/Desktop/check/'
     test_data, test_label, train_data, train_label=loadTestAndTrainData(filePath,0.1)
     totalSize=len(test_label)
     start=time.time()
 
     # knn
-    print("KNN start!")
-    precision, unpre=KNN(test_data, test_label, train_data, train_label)
+    # print("KNN start!")
+    # precision, unpre=KNN(test_data, test_label, train_data, train_label)
 
-    # # svm
-    # print("SVM start!")
-    # precision, unpre=SVM(test_data, test_label, train_data, train_label)
+    #svm
+    print("SVM start!")
+    precision, unpre=SVM(test_data, test_label, train_data, train_label)
 
 
     print("Running time:%s"%str(time.time()-start))
